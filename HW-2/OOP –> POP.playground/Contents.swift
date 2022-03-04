@@ -39,14 +39,6 @@ enum PrimaryAttribute: Int, Comparable {
 protocol Statistics {
     typealias Attributes = (armor: Float, attackPower: Float, strength: Float, agility: Float, intelligence: Float, hitPoints: Float, mana: Float)
 
-    var armor: Float? { get }
-    var attackPower: Float? { get }
-    var strength: Float? { get }
-    var agility: Float? { get }
-    var intelligence: Float? { get }
-    var hitPoints: Float? { get }
-    var mana: Float? { get }
-
     init(statistics: Attributes, attack: AttackStyle, attribute: PrimaryAttribute)
     
     mutating func updateStatistics(_ statistics: Attributes)
@@ -54,7 +46,6 @@ protocol Statistics {
 
 protocol Actionable {
     var action: AttackStyle { get }
-    
     var primaryAttribute: PrimaryAttribute { get }
 }
 

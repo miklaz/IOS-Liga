@@ -11,14 +11,7 @@ enum LessonType {
     case literature(rating: Int)
 }
 
-protocol comparableProtocol {
-    static func <  (first: Self, second: Self) -> Bool
-    static func >  (first: Self, second: Self) -> Bool
-    static func <= (first: Self, second: Self) -> Bool
-    static func >= (first: Self, second: Self) -> Bool
-}
-
-extension LessonType: comparableProtocol {
+extension LessonType: Comparable {
     
     static func > (first: LessonType, second: LessonType) -> Bool {
         switch (first, second) {
