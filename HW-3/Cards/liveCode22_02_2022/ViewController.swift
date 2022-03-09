@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
 // MARK: - Const & Var
-    private lazy var subviewBackgroundColor: UIColor = .secondarySystemFill
+    private lazy var subviewBackgroundColor: UIColor = .secondarySystemBackground
     private lazy var subviewCornerRadius: CGFloat = 20
     private lazy var buttonCornerRadius: CGFloat = 8
     private lazy var successColor: UIColor = .systemGreen
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        configText()
+        configTextUIElements()
     }
 }
 
@@ -90,13 +90,15 @@ extension ViewController {
         return label
     }
     
-    private func configText() {
+    private func configTextUIElements() {
         nameTextField.placeholder = "Введите имя"
         emailTextField.placeholder = "Введите Email"
         nameValidateLabel.text = "Ожидание валидации имени..."
         emailValidateLabel.text = "Ожидание валидации Email..."
         nameValidateButton.setTitle("Валидировать Имя", for: .normal)
+        nameValidateButton.addTarget(self, action: #selector(didTapNameValidateButton), for: .touchUpInside)
         emailValidateButton.setTitle("Валидировать Email", for: .normal)
+        emailValidateButton.addTarget(self, action: #selector(didTapEmailValidateButton), for: .touchUpInside)
     }
     
     private func configureView() {
@@ -161,6 +163,7 @@ extension ViewController {
             emailValidateButton.trailingAnchor.constraint(equalTo: secondCardView.trailingAnchor, constant: -16),
             emailValidateButton.bottomAnchor.constraint(equalTo: secondCardView.bottomAnchor, constant: -16),
         ])
+        
     }
     
 // MARK: - Objc metods
@@ -169,7 +172,7 @@ extension ViewController {
         let regExString = "[A-Za-zА-ЯЁа-яё-]{2,}+\\s{1}+[A-Za-zА-ЯЁа-яё-]{2,}"
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regExString)
         let isValid = predicate.evaluate(with: nameTextField.text)
-
+        
         nameValidateLabel.text = isValid ? "Валидация имени прошла успешно" : "В поле Имя - ошибка"
         nameValidateLabel.textColor = isValid ? successColor : unSuccessColor
     }
@@ -178,7 +181,7 @@ extension ViewController {
     private func didTapEmailValidateButton() {
         let regExString = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regExString)
-        let isValid = predicate.evaluate(with: nameTextField.text)
+        let isValid = predicate.evaluate(with: emailTextField.text)
 
         emailValidateLabel.text = isValid ? "Валидация Email прошла успешно" : "В поле Email - ошибка"
         emailValidateLabel.textColor = isValid ? successColor : unSuccessColor
