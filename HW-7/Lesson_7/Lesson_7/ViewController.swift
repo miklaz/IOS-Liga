@@ -8,38 +8,44 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    private let customTableViewCellIdentifier = "customCell"
-    private let customTableViewHeaderIdentifier = "customHeader"
+
+// MARK: - Private Const & Var
+    private let customTableViewCellIdentifier = "cell"
+    private let customTableViewHeaderIdentifier = "header"
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: customTableViewCellIdentifier)
         tableView.register(CustomHeaderView.self, forHeaderFooterViewReuseIdentifier: customTableViewHeaderIdentifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         return tableView
     }()
-
+    
+// MARK: - VС Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Music"
         configureView()
     }
+    
 }
 
+// MARK: - TableView Delegate & DataSource
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        !modelSelection[section].open ? 0 : modelSelection[section].data.count
+        return !modelSelection[section].open ? 0 : modelSelection[section].data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: customTableViewCellIdentifier, for: indexPath) as! CustomTableViewCell
         let modelCell = modelSelection[indexPath.section].data[indexPath.row]
         cell.configCell(model: modelCell)
+        
         return cell
     }
     
@@ -57,13 +63,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return modelSelection.count
     }
-    
-    internal func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
-    }
-    
 }
 
+// MARK: - Private Metods
 extension ViewController {
     private func configureView(){
         view.addSubview(tableView)

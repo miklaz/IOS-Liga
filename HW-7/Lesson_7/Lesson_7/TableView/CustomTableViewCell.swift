@@ -8,6 +8,8 @@
 import UIKit
 
 final class CustomTableViewCell: UITableViewCell {
+    
+// MARK: - Private Const & Var
     private lazy var arrayStars = [UIImageView]()
     
     private lazy var imageCover: UIImageView = {

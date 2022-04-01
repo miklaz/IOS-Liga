@@ -49,12 +49,12 @@ extension CustomHeaderView {
         addSubview(button)
         
         NSLayoutConstraint.activate([
-            titleHeader.topAnchor.constraint(equalTo: self.topAnchor),
-            titleHeader.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            titleHeader.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            titleHeader.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
+            titleHeader.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
+            titleHeader.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
             
             button.topAnchor.constraint(equalTo: titleHeader.topAnchor),
-            button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12),
             button.bottomAnchor.constraint(equalTo: titleHeader.bottomAnchor)
         ])
     }
