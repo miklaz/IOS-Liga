@@ -14,7 +14,7 @@ enum VC {
 
 final class ModallyNextVC: UIViewController {
     private var typeVC: VC
-    
+    // MARK: - VС Life Cycle
     override func viewDidLoad() {
         self.isModalInPresentation = false
         super.viewDidLoad()
@@ -34,10 +34,6 @@ final class ModallyNextVC: UIViewController {
         }
     }
     
-    @objc private func dismissVC(){
-        dismiss(animated: false, completion: nil)
-    }
-    
     init(typeViewController: VC){
         self.typeVC = typeViewController
         super.init(nibName: nil, bundle: nil)
@@ -45,6 +41,10 @@ final class ModallyNextVC: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func dismissVC(){
+        dismiss(animated: false, completion: nil)
     }
     
 }

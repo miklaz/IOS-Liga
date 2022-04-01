@@ -8,7 +8,7 @@
 import UIKit
 
 final class CardsView: UIView {
-    
+// MARK: - Const & Var
     var goToNavigationVC: (() -> Void)?
     var goToModallyVC: (() -> Void)?
     
@@ -45,16 +45,7 @@ final class CardsView: UIView {
                                               fontSize: 35,
                                               fontWeight: .light,
                                               cornerRadius: 4)
-    
-    @objc
-    private func toNavigationVC(){
-        goToNavigationVC!()
-    }
-    @objc
-    private func toModallyVC(){
-        goToModallyVC!()
-    }
-    
+
     init(){
         super.init(frame: .zero)
         configuration()
@@ -63,7 +54,7 @@ final class CardsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
+// MARK: - Private Metods
 extension CardsView {
     private func configuration(){
         textInfo.layer.borderColor = UIColor.systemGray.cgColor
@@ -78,11 +69,11 @@ extension CardsView {
         self.backgroundColor = .systemBackground
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addSubview(textInfo)
-        self.addSubview(labelCource)
-        self.addSubview(buttonMore)
-        self.addSubview(priceLabel)
-        self.addSubview(addButton)
+        addSubview(textInfo)
+        addSubview(labelCource)
+        addSubview(buttonMore)
+        addSubview(priceLabel)
+        addSubview(addButton)
         
         NSLayoutConstraint.activate([
             textInfo.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
@@ -107,6 +98,15 @@ extension CardsView {
             addButton.heightAnchor.constraint(equalToConstant: 41),
             addButton.widthAnchor.constraint(equalToConstant: 82)
         ])
+    }
+    
+    @objc
+    private func toNavigationVC(){
+        goToNavigationVC!()
+    }
+    @objc
+    private func toModallyVC(){
+        goToModallyVC!()
     }
     
 }

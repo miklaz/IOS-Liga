@@ -9,12 +9,16 @@ import UIKit
 
 final class AfterLargeViewController: UIViewController {
     
+    override func loadView() {
+        super.loadView()
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemYellow
         self.title = "Standard Navigation Bar"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .never
         tabBarController?.tabBar.isHidden = true
     }
 }

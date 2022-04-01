@@ -14,12 +14,17 @@ final class LargeNavigationVC: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("  Push me ", for: .normal)
         button.titleLabel!.font = UIFont.systemFont(ofSize: 20)
-        button.backgroundColor = .systemOrange
+        button.backgroundColor = .systemYellow
         button.tintColor = .systemBlue
         button.layer.cornerRadius = 4
         button.addTarget(self, action: #selector(toStandart), for: .touchUpInside)
         return button
     }()
+    
+    override func loadView() {
+        super.loadView()
+        navigationItem.largeTitleDisplayMode = .always
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +33,12 @@ final class LargeNavigationVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
     }
 }
 
+// MARK: - Private Metods
 extension LargeNavigationVC {
     @objc
     private func toStandart(){
@@ -44,7 +50,6 @@ extension LargeNavigationVC {
         view.backgroundColor = .secondarySystemBackground
         self.title = "Large Navigation Bar"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .automatic
         
         view.addSubview(newVCPress)
         NSLayoutConstraint.activate([

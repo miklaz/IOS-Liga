@@ -9,8 +9,7 @@ import UIKit
 
 final class AutoLayoutVC: UIViewController {
     private lazy var cardView1 = CardsView()
-    
-    
+// MARK: - VС Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Auto Layout"
@@ -19,14 +18,9 @@ final class AutoLayoutVC: UIViewController {
         navigationItem.rightBarButtonItem  = barButtonItem
     }
     
-    @objc
-    private func newVC() {
-        let newViewController = ModallyNextVC(typeViewController: .autoLayout)
-        newViewController.modalPresentationStyle = .pageSheet
-        present(newViewController, animated: true, completion: nil)
-    }
 }
 
+// MARK: - Private Metods
 extension AutoLayoutVC {
     private func configuration() {
         view.backgroundColor = .secondarySystemBackground
@@ -45,6 +39,13 @@ extension AutoLayoutVC {
             let newViewController = ModallyVC()
             self.navigationController?.pushViewController(newViewController, animated: true)
         }
+    }
+    
+    @objc
+    private func newVC() {
+        let newViewController = ModallyNextVC(typeViewController: .autoLayout)
+        newViewController.modalPresentationStyle = .pageSheet
+        present(newViewController, animated: true, completion: nil)
     }
     
 }

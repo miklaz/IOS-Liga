@@ -8,7 +8,7 @@
 import UIKit
 
 final class ManualVC: UIViewController {
-    
+// MARK: - Const & Var
     private lazy var cardView = BaseUIView(backgroundColor: .systemBackground)
     
     private lazy var labelCource = BaseUILabel(text: "Курсы по iOS разработке + Сomputer Science + Computer Vision + System Design",
@@ -38,7 +38,7 @@ final class ManualVC: UIViewController {
                                               fontSize: 35,
                                               fontWeight: .light,
                                               cornerRadius: 4)
-    
+// MARK: - VС Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
@@ -50,6 +50,29 @@ final class ManualVC: UIViewController {
         addButton.addTarget(self, action: #selector(toNavigationVC), for: .touchUpInside)
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newVC))
         self.navigationItem.rightBarButtonItem  = barButtonItem
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        configuration()
+    }
+}
+
+// MARK: - Private Metods
+extension ManualVC{
+    private func configuration() {
+        view.addSubview(cardView)
+        cardView.addSubview(labelCource)
+        cardView.addSubview(buttonMore)
+        cardView.addSubview(priceLabel)
+        cardView.addSubview(addButton)
+        
+        let viewWidth = UIScreen.main.bounds.width - 40
+        cardView.frame = CGRect(x: 20, y: view.safeAreaInsets.top+20, width: viewWidth, height: 200 )
+        labelCource.frame = CGRect(x: 20, y: 20, width: cardView.bounds.width - 40, height: 66)
+        buttonMore.frame = CGRect(x: 20, y: labelCource.frame.maxY+4, width: 120, height: 30)
+        priceLabel.frame = CGRect(x: 20, y: buttonMore.frame.maxY+23, width: 120, height: 28)
+        addButton.frame = CGRect(x: cardView.bounds.width-20-82, y: priceLabel.frame.minY, width: 82, height: 41)
     }
     
     @objc
@@ -68,27 +91,6 @@ final class ManualVC: UIViewController {
         newViewController.modalPresentationStyle = .pageSheet
         present(newViewController, animated: true, completion: nil)
         
-    }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        configuration()
-    }
-}
-
-extension ManualVC{
-    private func configuration() {
-        view.addSubview(cardView)
-        cardView.addSubview(labelCource)
-        cardView.addSubview(buttonMore)
-        cardView.addSubview(priceLabel)
-        cardView.addSubview(addButton)
-        
-        let viewWidth = UIScreen.main.bounds.width - 40
-        cardView.frame = CGRect(x: 20, y: view.safeAreaInsets.top+20, width: viewWidth, height: 200 )
-        labelCource.frame = CGRect(x: 20, y: 20, width: cardView.bounds.width - 40, height: 66)
-        buttonMore.frame = CGRect(x: 20, y: labelCource.frame.maxY+4, width: 120, height: 30)
-        priceLabel.frame = CGRect(x: 20, y: buttonMore.frame.maxY+23, width: 120, height: 28)
-        addButton.frame = CGRect(x: cardView.bounds.width-20-82, y: priceLabel.frame.minY, width: 82, height: 41)
     }
 }
 

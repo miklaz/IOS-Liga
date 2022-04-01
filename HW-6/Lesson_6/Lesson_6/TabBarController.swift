@@ -8,14 +8,16 @@
 import UIKit
 
 final class TabBarController: UITabBarController{
-    
+// MARK: - VС Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configTab()
+        createTabBar()
+        configTabBar()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+}
+// MARK: - Private Metods
+extension TabBarController: UITabBarControllerDelegate {
+    private func createTabBar() {
         let autoLayoutView = BaseNavigationController(rootViewController: AutoLayoutVC())
         let xibView = BaseNavigationController(rootViewController: XibVC(nibName: "XibView", bundle: nil))
         let manualView = BaseNavigationController(rootViewController: ManualVC())
@@ -47,10 +49,7 @@ final class TabBarController: UITabBarController{
         }
     }
     
-}
-
-extension TabBarController: UITabBarControllerDelegate {
-    private func configTab(){
+    private func configTabBar(){
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemCyan.withAlphaComponent(0.2)
@@ -67,8 +66,8 @@ extension TabBarController: UITabBarControllerDelegate {
     }
     
     private func setTabBarItemColors(_ itemAppearance: UITabBarItemAppearance) {
-        itemAppearance.normal.iconColor = .systemGray
-        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
+        itemAppearance.normal.iconColor = .label
+        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
         itemAppearance.selected.iconColor = .systemCyan
         itemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemCyan]
     }
